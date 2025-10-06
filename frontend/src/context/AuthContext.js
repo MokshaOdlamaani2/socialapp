@@ -12,12 +12,8 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       try {
         const decoded = jwt_decode(token);
-        console.log('Decoded token:', decoded); // Inspect this in console
-
-        // Some tokens have user info directly, some nested under 'user'
         const userData = decoded.user || decoded;
 
-        // Normalize user id field to _id if necessary
         if (userData && !userData._id && userData.id) {
           userData._id = userData.id;
         }
@@ -34,20 +30,16 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token]);
 
-  // Updated login to accept email and password
   const login = async (email, password) => {
     const res = await api.post('/auth/login', { email, password });
     const receivedToken = res.data.token;
     localStorage.setItem('token', receivedToken);
+    setToken(receivedToken);
 
     let userData = res.data.user;
-
-    // Normalize _id field
     if (userData && !userData._id && userData.id) {
       userData._id = userData.id;
     }
-
-    setToken(receivedToken);
     setUser(userData);
 
     return res.data;
@@ -60,13 +52,12 @@ export const AuthProvider = ({ children }) => {
     setToken(receivedToken);
 
     let userData = res.data.user;
-
-    // Normalize _id field if present
     if (userData && !userData._id && userData.id) {
       userData._id = userData.id;
     }
-    
     setUser(userData);
+
+    return res.data;
   };
 
   const logout = () => {

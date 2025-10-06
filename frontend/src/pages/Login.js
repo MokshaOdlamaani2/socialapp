@@ -15,8 +15,8 @@ const Login = () => {
     e.preventDefault();
     setError('');
     try {
-      await login(form.email, form.password); // Use email here
-      navigate('/dashboard');
+      await login(form.email, form.password);
+      navigate('/dashboard');  // Redirect after successful login
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to login');
     }

@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './components/ResetPassword';  // Import the new ResetPassword page
+import ResetPassword from './components/ResetPassword';
 import Dashboard from './pages/Dashboard';
 import CreatePost from './pages/CreatePost';
 import { AuthProvider, AuthContext } from './context/AuthContext';
@@ -55,9 +55,7 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Navbar />
-
         <Background />
-
         <main
           style={{
             padding: '20px',
@@ -72,7 +70,7 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/reset-password" element={<ResetPassword />} /> {/* New route */}
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route
               path="/dashboard"
               element={

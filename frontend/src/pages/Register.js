@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import '../App.css';
+
 const Register = () => {
   const { register } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Register = () => {
     e.preventDefault();
     try {
       await register(form.email, form.username, form.password);
-      navigate('/dashboard');
+      navigate('/login'); // Redirect to login after successful register
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to register');
     }
